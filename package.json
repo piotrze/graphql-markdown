@@ -1,5 +1,5 @@
 {
-  "name": "@edno/docusaurus2-graphql-doc-generator",
+  "name": "graphql-docs-markdown",
   "homepage": "https://edno.github.io/graphql-markdown",
   "description": "Docusaurus 2 plugin for generating Markdown documentation from a GraphQL schema.",
   "bugs": {
