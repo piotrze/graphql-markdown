@@ -18,6 +18,7 @@ module.exports = async function generateDocFromSchema({
   outputDir,
   linkRoot,
   homepageLocation,
+  navigationLocation,
   diffMethod,
   tmpDir,
   loaders,
@@ -46,8 +47,8 @@ module.exports = async function generateDocFromSchema({
         renderer.renderRootTypes(typeName, rootTypes[typeName]),
       ),
     );
-    await renderer.renderHomepage(homepageLocation);
-    const sidebarPath = await renderer.renderSidebar();
+    await renderer.renderNavigationData(navigationLocation);
+    // const sidebarPath = await renderer.renderSidebar();
 
     const [sec, msec] = process.hrtime(time);
     const duration = (sec + msec / 1e9).toFixed(3);
@@ -61,13 +62,6 @@ module.exports = async function generateDocFromSchema({
         `${
           pages.flat().length
         } pages generated in ${duration}s from schema "${schemaLocation}".`,
-      ),
-    );
-    console.info(
-      pico.blue(
-        pico.bold(
-          `Remember to update your Docusaurus site's sidebars with "${sidebarPath}".`,
-        ),
       ),
     );
 

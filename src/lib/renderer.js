@@ -13,6 +13,7 @@ const {
   readFile,
   fileExists,
 } = require("../utils/helpers/fs");
+const { basename } = require("path");
 
 const SIDEBAR = "sidebar-schema.js";
 const HOMEPAGE_ID = "schema";
@@ -23,6 +24,7 @@ module.exports = class Renderer {
     this.outputDir = outputDir;
     this.baseURL = baseURL;
     this.printer = printer;
+    this.navigation = {};
   }
 
   async emptyOutputDir() {
@@ -35,6 +37,12 @@ module.exports = class Renderer {
       await ensureDir(dirPath);
       await saveFile(filePath, `label: '${startCase(category)}'\n`);
     }
+  }
+
+  addToNavigation(path) {
+    path.split("/").reduce(function (r, e) {
+      return r[e] || (r[e] = {});
+    }, this.navigation);
   }
 
   async renderRootTypes(rootTypeName, type) {
@@ -52,11 +60,13 @@ module.exports = class Renderer {
 
         if (hasProperty(this.group, name)) {
           dirPath = path.join(dirPath, toSlug(this.group[name]));
-          await this.generateCategoryMetafile(this.group[name], dirPath);
+          // await this.generateCategoryMetafile(this.group[name], dirPath);
         }
-
         dirPath = path.join(dirPath, toSlug(rootTypeName));
-        await this.generateCategoryMetafile(rootTypeName, dirPath);
+        // await this.generateCategoryMetafile(rootTypeName, dirPath);
+        this.addToNavigation(
+          path.join(dirPath.replace("generated/", ""), name),
+        );
 
         return this.renderTypeEntities(dirPath, name, type[name]);
       }),
@@ -69,18 +79,22 @@ module.exports = class Renderer {
     }
 
     const fileName = toSlug(name);
-    const filePath = path.join(path.normalize(dirPath), `${fileName}.mdx`);
+    const filePath = path.join(path.normalize(dirPath), `${fileName}.liquid`);
 
     const content = this.printer.printType(fileName, type);
     await saveFile(filePath, content);
 
     const pagePath = path.relative(this.outputDir, filePath);
     const page = pagePath.match(
-      /(?<category>[A-z0-9-_]+)[\\/]+(?<pageId>[A-z0-9-_]+).mdx?$/,
+      /(?<category>[A-z0-9-_]+)[\\/]+(?<pageId>[A-z0-9-_]+).liquid?$/,
     );
     const slug = pathUrl.join(page.groups.category, page.groups.pageId);
 
     return { category: startCase(page.groups.category), slug: slug };
+  }
+
+  async renderNavigationData(navigationLocation) {
+    await saveFile(navigationLocation, JSON.stringify(this.navigation));
   }
 
   async renderSidebar() {

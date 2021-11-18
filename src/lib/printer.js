@@ -185,7 +185,7 @@ module.exports = class Printer {
   }
 
   printHeader(id, title) {
-    return `---\nid: ${id}\ntitle: ${title}\n---\n`;
+    return `---\nconverter: markdown\nmetadata:\n  title: ${title}\n---\n`;
   }
 
   printDeprecation(type) {
