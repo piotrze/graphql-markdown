@@ -58,9 +58,6 @@
     "mock-fs": "^5.1.1",
     "pinst": "^2.1.6"
   },
-  "bundleDependencies": [
-    "graphql"
-  ],
   "prettier": {
     "singleQuote": false,
     "bracketSpacing": true,

@@ -2005,8 +2005,9 @@
   "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.8.tgz"
   "version" "4.2.8"
 
-"graphql@^0.13.0 || ^14.0.0 || ^15.0.0", "graphql@^14.0.0 || ^15.0.0 || ^16.0.0", "graphql@github:Platform-OS/graphql-js":
-  "resolved" "git+ssh://git@github.com/Platform-OS/graphql-js.git#f2c0c54db086f59a3a3ac4ec5ed6052afdb728f2"
+"graphql@^0.13.0 || ^14.0.0 || ^15.0.0", "graphql@^14.0.0 || ^15.0.0 || ^16.0.0", "graphql@^16.0.1":
+  "integrity" "sha512-oPvCuu6dlLdiz8gZupJ47o1clgb72r1u8NDBcQYjcV6G/iEdmE11B1bBlkhXRvV0LisP/SXRFP7tT6AgaTjpzg=="
+  "resolved" "https://registry.npmjs.org/graphql/-/graphql-16.0.1.tgz"
   "version" "16.0.1"
 
 "has-flag@^3.0.0":
