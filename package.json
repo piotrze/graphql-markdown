@@ -1,5 +1,5 @@
 {
-  "name": "graphql-docs-markdown",
+  "name": "@platformos/graphql-docs-markdown",
   "homepage": "https://edno.github.io/graphql-markdown",
   "description": "Docusaurus 2 plugin for generating Markdown documentation from a GraphQL schema.",
   "bugs": {
@@ -10,7 +10,7 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edno/graphql-markdown.git"
+    "url": "git+https://github.com/piotrze/graphql-markdown.git"
   },
   "keywords": [
     "docusaurus",
@@ -58,6 +58,9 @@
     "mock-fs": "^5.1.1",
     "pinst": "^2.1.6"
   },
+  "bundleDependencies": [
+    "graphql"
+  ],
   "prettier": {
     "singleQuote": false,
     "bracketSpacing": true,
